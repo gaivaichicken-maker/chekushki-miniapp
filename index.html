@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>ЧЕКУШКИ — Жизнь</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ambient"></div>
+  <div class="particles" id="particles"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-mark">Ч</div>
+      <div>
+        <div class="logo-text">ЧЕКУШКИ</div>
+        <div class="logo-sub">реальная жизнь</div>
+      </div>
+    </div>
+    <div class="balance-pill" id="balancePill">
+      <span class="coin">💰</span>
+      <span id="topBalance">0</span>
+    </div>
+  </header>
+
+  <section class="profile-strip glass" id="profileStrip">
+    <div class="avatar-wrap">
+      <div class="avatar" id="avatar">?</div>
+      <div class="status-dot" id="statusDot"></div>
+    </div>
+    <div class="profile-meta">
+      <div class="name-row">
+        <b id="displayName">Игрок</b>
+        <span class="prefix" id="prefixBadge"></span>
+      </div>
+      <div class="uname" id="displayUsername">@player</div>
+      <div class="level-bar">
+        <div class="level-fill" id="levelFill"></div>
+        <span id="levelText">Ур. 1</span>
+      </div>
+    </div>
+    <button class="mini-btn" id="profileBtn">Профиль</button>
+  </section>
+
+  <main class="content">
+    <!-- TAB 1: HOME -->
+    <section class="tab active" id="tab-home">
+      <div class="stats-row">
+        <div class="stat-card" data-stat="health">
+          <span>❤️</span>
+          <div><small>Здоровье</small><b id="statHealth">100</b></div>
+        </div>
+        <div class="stat-card" data-stat="energy">
+          <span>⚡</span>
+          <div><small>Энергия</small><b id="statEnergy">100</b></div>
+        </div>
+        <div class="stat-card" data-stat="stress">
+          <span>😰</span>
+          <div><small>Стресс</small><b id="statStress">0</b></div>
+        </div>
+        <div class="stat-card" data-stat="hunger">
+          <span>🍗</span>
+          <div><small>Сытость</small><b id="statHunger">100</b></div>
+        </div>
+      </div>
+
+      <div class="section-title">Действия</div>
+      <div class="action-grid">
+        <button class="action-card" data-action="rest">
+          <div class="ac-icon">😴</div>
+          <div class="ac-title">Отдохнуть</div>
+          <div class="ac-desc">+25 энергии · −15 стресса</div>
+        </button>
+        <button class="action-card" data-action="eat">
+          <div class="ac-icon">🍗</div>
+          <div class="ac-title">Поесть</div>
+          <div class="ac-desc">−100 · +40 сытости</div>
+        </button>
+        <button class="action-card" data-action="meditate">
+          <div class="ac-icon">🧘</div>
+          <div class="ac-title">Медитация</div>
+          <div class="ac-desc">−40 стресса</div>
+        </button>
+        <button class="action-card" data-action="shower">
+          <div class="ac-icon">🚿</div>
+          <div class="ac-title">Душ</div>
+          <div class="ac-desc">+20 настроение · −10 стресс</div>
+        </button>
+      </div>
+
+      <div class="section-title">Работа</div>
+      <div class="job-list" id="jobList"></div>
+
+      <div class="section-title">Кредиты</div>
+      <div class="credit-box glass">
+        <div id="debtInfo">Долгов нет</div>
+        <div class="credit-actions">
+          <button class="btn secondary" id="takeCreditBtn">Взять кредит</button>
+          <button class="btn" id="repayBtn">Погасить</button>
+        </div>
+      </div>
+
+      <div class="section-title">Прочее</div>
+      <div class="misc-row">
+        <button class="btn wide" id="dailyBtn">🎁 Ежедневка</button>
+        <button class="btn wide secondary" id="promoBtn">🎟 Промокод</button>
+      </div>
+
+      <div id="adminPanel" class="admin-panel glass hidden">
+        <div class="section-title">🛠 Админ-панель</div>
+        <p class="admin-note">Работает локально на этом устройстве. Для реального мультипользовательского админа нужен сервер.</p>
+        <input type="text" id="adminUser" placeholder="Username (без @)" class="input">
+        <input type="number" id="adminAmount" placeholder="Сумма (+/-)" class="input">
+        <button class="btn wide" id="adminSetBalance">Изменить баланс (текущий юзер)</button>
+        <div class="divider"></div>
+        <input type="text" id="promoCodeNew" placeholder="Код промо" class="input">
+        <input type="number" id="promoReward" placeholder="Награда" class="input">
+        <input type="number" id="promoUses" placeholder="Использований" class="input">
+        <button class="btn wide" id="createPromoBtn">Создать промокод</button>
+      </div>
+    </section>
+
+    <!-- TAB 2: GAMES -->
+    <section class="tab" id="tab-games">
+      <div class="section-title">Казино</div>
+      <div class="games-grid" id="gamesGrid">
+        <button class="game-card" data-game="coin">
+          <div class="gc-icon">🪙</div>
+          <b>Монетка</b>
+          <small>Выбери сторону · x2</small>
+        </button>
+        <button class="game-card" data-game="number">
+          <div class="gc-icon">🔢</div>
+          <b>Угадай число</b>
+          <small>1–10 · x8</small>
+        </button>
+        <button class="game-card" data-game="slots">
+          <div class="gc-icon">🎰</div>
+          <b>Слоты</b>
+          <small>Три символа</small>
+        </button>
+        <button class="game-card" data-game="bj">
+          <div class="gc-icon">🃏</div>
+          <b>Блэкджек</b>
+          <small>21 очко</small>
+        </button>
+        <button class="game-card" data-game="roulette">
+          <div class="gc-icon">💎</div>
+          <b>Рулетка</b>
+          <small>Красное / Чёрное</small>
+        </button>
+        <button class="game-card" data-game="rocket">
+          <div class="gc-icon">🚀</div>
+          <b>Ракета</b>
+          <small>Crash · забери вовремя</small>
+        </button>
+      </div>
+
+      <div class="game-screen hidden" id="gameScreen">
+        <button class="back-link" id="gameBack">← К играм</button>
+        <h2 id="gameTitle">Игра</h2>
+
+        <div class="bet-box glass">
+          <label>Ставка (любая сумма)</label>
+          <div class="bet-controls">
+            <button class="bet-btn" data-bet="100">100</button>
+            <button class="bet-btn" data-bet="1000">1k</button>
+            <button class="bet-btn" data-bet="10000">10k</button>
+            <button class="bet-btn" data-bet="50000">50k</button>
+            <button class="bet-btn" data-bet="100000">100k</button>
+            <button class="bet-btn" data-bet="all">Всё</button>
+          </div>
+          <input type="number" id="customBet" class="input" placeholder="Своя сумма" min="1">
+        </div>
+
+        <div class="choice-box" id="choiceBox"></div>
+
+        <div class="game-visual-wrap glass">
+          <div id="gameVisual" class="game-visual">—</div>
+          <div id="gameStatus" class="game-status">Выбери параметры и нажми Играть</div>
+          <div id="rocketMult" class="rocket-mult hidden">x1.00</div>
+        </div>
+
+        <div class="game-actions">
+          <button class="btn play-btn" id="playGameBtn">ИГРАТЬ</button>
+          <button class="btn cashout-btn hidden" id="cashoutBtn">ЗАБРАТЬ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: STATS -->
+    <section class="tab" id="tab-stats">
+      <div class="section-title">Статистика</div>
+      <div class="stats-list glass">
+        <div class="stat-row"><span>🎮 Игр сыграно</span><b id="sGames">0</b></div>
+        <div class="stat-row"><span>🏅 Побед</span><b id="sWins">0</b></div>
+        <div class="stat-row"><span>💰 Всего заработано</span><b id="sEarned">0</b></div>
+        <div class="stat-row"><span>🏆 Крупнейший выигрыш</span><b id="sBiggest">0</b></div>
+        <div class="stat-row"><span>📅 Первая игра</span><b id="sFirst">—</b></div>
+        <div class="stat-row"><span>💳 Текущий долг</span><b id="sDebt">0</b></div>
+        <div class="stat-row"><span>⭐ Уровень</span><b id="sLevel">1</b></div>
+        <div class="stat-row"><span>📈 Опыт</span><b id="sXp">0</b></div>
+      </div>
+
+      <div class="section-title">История</div>
+      <div class="history-list" id="historyList"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="home">
+      <span>🏠</span>
+      <small>Главная</small>
+    </button>
+    <button class="nav-item" data-tab="games">
+      <span>🎮</span>
+      <small>Игры</small>
+    </button>
+    <button class="nav-item" data-tab="stats">
+      <span>📊</span>
+      <small>Статистика</small>
+    </button>
+  </nav>
+
+  <div class="modal-overlay hidden" id="modal">
+    <div class="modal glass">
+      <h3 id="modalTitle">—</h3>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="fx" class="fx"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
