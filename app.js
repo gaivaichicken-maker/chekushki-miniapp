@@ -16,7 +16,7 @@ const PROMO_KEY = 'chekushki_promos_v1';
 const LB_KEY = 'chekushki_leaderboard_v1';
 const TRANSFER_KEY = 'chekushki_transfers_v1';
 const REBIRTH_COST = 5000000000;
-const GEM_RATE = 1000000; // 1 gem = 1M chekushki
+const GEM_RATE = 1000000000; // 1 gem = 1B chekushki
 
 const PREFIX_SHOP = [
   { id: 'crown', label: '👑', price: 50 },
