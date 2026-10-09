@@ -18,7 +18,7 @@ const TRANSFER_KEY = 'chekushki_transfers_v1';
 const REBIRTH_COST = 5000000000;
 const GEM_RATE = 1000000000; // 1 gem = 1 млрд чекушек
 // Юзернейм бота без @ — нужен для оплаты Stars
-const BOT_USERNAME = 'YOUR_BOT_USERNAME'; // ← замени на юзернейм бота
+const BOT_USERNAME = 'Chekynecbot'; // ← замени на юзернейм бота
 // Секрет кодов за Stars (должен совпадать с bot.py STAR_CODE_SECRET)
 const STAR_CODE_SECRET = 'chekushki_stars_v1';
 
