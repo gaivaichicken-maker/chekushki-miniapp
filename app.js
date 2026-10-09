@@ -372,14 +372,14 @@ function renderAll() {
 
 function renderJobs() {
   const jobs = [
-    { id: 'cleaner', icon: '🧹', name: 'Уборщик', min: 150, max: 300, energy: 10, cd: 60 },
-    { id: 'loader', icon: '📦', name: 'Грузчик', min: 250, max: 500, energy: 15, cd: 120 },
-    { id: 'barista', icon: '☕', name: 'Бариста', min: 300, max: 600, energy: 15, cd: 180 },
-    { id: 'freelance', icon: '💻', name: 'Фриланс', min: 400, max: 900, energy: 20, cd: 240 },
-    { id: 'taxi', icon: '🚕', name: 'Таксист', min: 500, max: 1200, energy: 25, cd: 300 },
-    { id: 'trader', icon: '📈', name: 'Криптотрейдер', min: 2000, max: 5000, energy: 30, cd: 420 },
-    { id: 'biz', icon: '👔', name: 'Бизнесмен', min: 5000, max: 15000, energy: 40, cd: 600 },
-    { id: 'dev', icon: '🚀', name: 'Айтишник', min: 10000, max: 30000, energy: 50, cd: 900 }
+    { id: 'cleaner', icon: '🧹', name: 'Уборщик', min: 150, max: 300, energy: 10, cd: 6 },
+    { id: 'loader', icon: '📦', name: 'Грузчик', min: 250, max: 500, energy: 15, cd: 12 },
+    { id: 'barista', icon: '☕', name: 'Бариста', min: 300, max: 600, energy: 15, cd: 18 },
+    { id: 'freelance', icon: '💻', name: 'Фриланс', min: 400, max: 900, energy: 20, cd: 24 },
+    { id: 'taxi', icon: '🚕', name: 'Таксист', min: 500, max: 1200, energy: 25, cd: 30 },
+    { id: 'trader', icon: '📈', name: 'Криптотрейдер', min: 2000, max: 5000, energy: 30, cd: 42 },
+    { id: 'biz', icon: '👔', name: 'Бизнесмен', min: 5000, max: 15000, energy: 40, cd: 60 },
+    { id: 'dev', icon: '🚀', name: 'Айтишник', min: 10000, max: 300000, energy: 70, cd: 90 }
   ];
   $('#jobList').innerHTML = jobs.map(j => `
     <button class="job-item" data-job="${j.id}">
@@ -844,7 +844,7 @@ const CREDITORS = {
   bank: { name: '🏦 Банк', rate: 0.8, max: 50000, period: 3600000, periodLabel: '%/ч' },
   pawnshop: { name: '💍 Ломбард', rate: 1.0, max: 150000, period: 3600000, periodLabel: '%/ч' },
   loan_shark: { name: '🦈 Ростовщик', rate: 1.5, max: 500000, period: 3600000, periodLabel: '%/ч' },
-  mafia: { name: '🔫 Мафия', rate: 10, max: 2000000, period: 600000, periodLabel: '% / 10 мин' }
+  mafia: { name: '🔫 Мафия', rate: 10, max: 20000000, period: 600000, periodLabel: '% / 10 мин' }
 };
 
 function openCreditModal() {
@@ -1388,7 +1388,7 @@ function checkFaint(won) {
     return;
   }
   changeBalance(-pen, 'Обморок / медпомощь');
-  state.stress = 50;
+  state.stress = 100;
   state.health = 50;
   toast(`🚑 Обморок! −${Math.round(pct * 100)}% баланса (${fmt(pen)}), больница`);
   saveState();
