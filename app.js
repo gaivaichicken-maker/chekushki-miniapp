@@ -25,7 +25,7 @@ const STAR_CODE_SECRET = 'chekushki_stars_v1';
 // === РЕАЛЬНЫЙ ТОП / АДМИНКА ===
 // После запуска бота сделай публичный URL на порт 8787 (cloudflared tunnel --url http://localhost:8787)
 // и вставь сюда, например: 'https://xxxx.trycloudflare.com'
-const API_BASE = ''; // ← вставь URL API без слэша в конце
+const API_BASE = 'https://funny-rockets-report.loca.lt'; // ← вставь URL API без слэша в конце
 const API_SECRET = 'chekushki_admin_secret_v1'; // как API_SECRET в bot.py
 
 // Пакеты гемов за Telegram Stars (звёзды идут владельцу бота)
